@@ -3,7 +3,7 @@
 ################################################################
 # Configurable things
 ################################################################
-BUILD ?= x86_64-pc-linux-gnu
+BUILD ?= i686-pc-linux-gnu
 BUILD_CPPFLAGS ?=
 BUILD_LDFLAGS ?=
 BUILD_CFLAGS ?=

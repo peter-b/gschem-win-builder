@@ -13,11 +13,7 @@ libffi_CONFIGURE_FLAGS = --disable-shared --enable-static
 
 libffi: libtool
 
-ifeq ($(HOST),$(BUILD))
-libffi:
-else
 libffi: libffi_install
-endif
 
 libffi_install: $(libffi_STAMP)
 	set -e; \

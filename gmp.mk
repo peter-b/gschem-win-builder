@@ -13,11 +13,7 @@ gmp_CONFIGURE_FLAGS = --disable-shared --enable-static
 
 gmp: libiconv
 
-ifeq ($(HOST),$(BUILD))
-gmp:
-else
 gmp: gmp_install
-endif
 
 gmp_install: $(gmp_STAMP)
 	set -e; \
