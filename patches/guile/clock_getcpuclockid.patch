@@ -1,0 +1,13 @@
+diff -Naur guile-2.0.11-old/libguile/stime.c guile-2.0.11-new/libguile/stime.c
+--- guile-2.0.11-old/libguile/stime.c	2014-02-28 20:01:27.000000000 +0000
++++ guile-2.0.11-new/libguile/stime.c	2016-01-10 20:58:42.166439550 +0000
+@@ -838,8 +838,7 @@
+     
+     /* Only use the _POSIX_CPUTIME clock if it's going to work across
+        CPUs. */
+-    if (clock_getcpuclockid (0, &dummy) == 0 &&
+-        clock_gettime (CLOCK_PROCESS_CPUTIME_ID, &posix_run_time_base) == 0)
++    if (clock_gettime (CLOCK_PROCESS_CPUTIME_ID, &posix_run_time_base) == 0)
+       get_internal_run_time = get_internal_run_time_posix_timer;
+     else
+       errno = 0;
