@@ -9,7 +9,7 @@ libffi_BUILD_DIR = $(core_build_dir)/libffi
 
 libffi_STAMP = $(libffi_BUILD_DIR)/stamp.makepack
 
-libffi_CONFIGURE_FLAGS = --disable-shared --enable-static
+libffi_CONFIGURE_FLAGS = --enable-shared --disable-static
 
 libffi: libtool
 

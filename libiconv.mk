@@ -9,19 +9,11 @@ libiconv_BUILD_DIR = $(core_build_dir)/libiconv
 
 libiconv_STAMP = $(libiconv_BUILD_DIR)/stamp.makepack
 
-libiconv_CONFIGURE_FLAGS = --disable-shared
+libiconv_CONFIGURE_FLAGS = --disable-static
 
 libiconv: libtool
 
-ifeq ($(HOST),$(BUILD))
-libiconv:
-else
-libiconv: libiconv_install
-endif
-
-libiconv_install: $(libiconv_STAMP)
-	set -e; \
-	$(MAKE) -C $(libiconv_BUILD_DIR)/libiconv-$(libiconv_VERSION) install
+libiconv: $(libiconv_STAMP)
 
 $(libiconv_STAMP): Makefile libiconv.mk $(libiconv_SOURCE)
 	set -e; \
@@ -31,7 +23,7 @@ $(libiconv_STAMP): Makefile libiconv.mk $(libiconv_SOURCE)
 	tar xf $(libiconv_SOURCE); \
 	cd libiconv-$(libiconv_VERSION); \
 	./configure $(core_configure_options) $(libiconv_CONFIGURE_FLAGS); \
-	$(MAKE); \
+	$(MAKE) && $(MAKE) install; \
 	touch $@
 
 $(libiconv_SOURCE):

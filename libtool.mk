@@ -9,7 +9,7 @@ libtool_BUILD_DIR = $(core_build_dir)/libtool
 
 libtool_STAMP = $(libtool_BUILD_DIR)/stamp.makepack
 
-libtool_CONFIGURE_FLAGS = --disable-shared --enable-static
+libtool_CONFIGURE_FLAGS = --enable-shared --disable-static
 
 libtool: libtool_install
 

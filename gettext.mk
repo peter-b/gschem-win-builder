@@ -9,19 +9,14 @@ gettext_BUILD_DIR = $(core_build_dir)/gettext
 
 gettext_STAMP = $(gettext_BUILD_DIR)/stamp.makepack
 
-gettext_CONFIGURE_FLAGS = --enable-relocatable --disable-shared --enable-static
+gettext_CONFIGURE_FLAGS = \
+	--prefix="$(core_install_dir)" \
+	--enable-relocatable --enable-shared --disable-static \
+	--host="$(HOST)" --build="$(BUILD)" CFLAGS="$(CFLAGS) -O2"
 
 gettext: libiconv
 
-ifeq ($(HOST),$(BUILD))
-gettext:
-else
-gettext: gettext_install
-endif
-
-gettext_install: $(gettext_STAMP)
-	set -e; \
-	$(MAKE) -C $(gettext_BUILD_DIR)/gettext-$(gettext_VERSION) install
+gettext: $(gettext_STAMP)
 
 $(gettext_STAMP): Makefile gettext.mk $(gettext_SOURCE)
 	set -e; \
@@ -30,8 +25,8 @@ $(gettext_STAMP): Makefile gettext.mk $(gettext_SOURCE)
 	cd $(gettext_BUILD_DIR); \
 	tar xf $(gettext_SOURCE); \
 	cd gettext-$(gettext_VERSION); \
-	./configure $(core_configure_options) $(gettext_CONFIGURE_FLAGS); \
-	$(MAKE); \
+	./configure $(gettext_CONFIGURE_FLAGS); \
+	$(MAKE) && $(MAKE) install; \
 	touch $@
 
 $(gettext_SOURCE):
